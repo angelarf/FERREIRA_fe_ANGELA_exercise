@@ -1,33 +1,38 @@
 import * as React from 'react';
-import {ListItem} from 'types';
+import {IListItem} from 'types';
 import Card from '../Card';
 import {Spinner} from '../Spinner';
-import {Container} from './styles';
+import {Container, ResultsLabel} from './styles';
 
 interface Props {
-    items?: ListItem[];
+    items?: IListItem[];
     hasNavigation?: boolean;
-    isLoading: string;
+    isLoading?: boolean;
 }
 
 const List = ({items, hasNavigation = true, isLoading}: Props) => {
+    if (isLoading) {
+        return <Spinner />;
+    }
+    const resultsLabel = `${items?.length || 0} team(s)`;
     return (
-        <Container>
-            {isLoading && <Spinner />}
-            {!isLoading &&
-                items.map(({url, id, columns, navigationProps}, index) => {
+        <React.Fragment>
+            <ResultsLabel>{resultsLabel}</ResultsLabel>
+            <Container>
+                {items?.map(({url, id, columns, navigationProps}) => {
                     return (
                         <Card
-                            key={`${id}-${index}`}
+                            key={id}
                             id={id}
                             columns={columns}
                             navigationProps={navigationProps}
                             hasNavigation={hasNavigation}
-                            url={url}
+                            url={url} 
                         />
                     );
                 })}
-        </Container>
+            </Container>
+        </React.Fragment>
     );
 };
 

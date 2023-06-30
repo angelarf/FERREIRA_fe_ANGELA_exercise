@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-    height: 100px;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -9,7 +8,9 @@ export const HeaderContainer = styled.div`
     justify-content: space-between;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+    color: #203e82;
+`;
 
 export const NavigationHeader = styled.div`
     display: flex;
