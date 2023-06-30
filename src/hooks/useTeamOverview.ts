@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { IUserData } from 'types';
-import { getTeamOverview, getUserData } from '../api';
+import {useState, useEffect} from 'react';
+import {IUserData} from 'types';
+import {getTeamOverview, getUserData} from '../api';
 
 const filterMemberByName = (teams: IUserData[], memberName: string) => {
-  return teams?.filter(({ firstName, lastName }) => {
+  return teams?.filter(({firstName, lastName}) => {
     const name = `${firstName} ${lastName}`;
     const lowerCaseName = name.toLocaleLowerCase();
     const filterLowerCase = memberName.toLocaleLowerCase();
@@ -11,7 +11,7 @@ const filterMemberByName = (teams: IUserData[], memberName: string) => {
   });
 };
 
-const useTeamOverview = ({ teamId, teamMemberFilter = '' }: { teamId: string, teamMemberFilter?: string }) => {
+const useTeamOverview = ({teamId, teamMemberFilter = ''}: { teamId: string, teamMemberFilter?: string }) => {
   const [error, setError] = useState<Error>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [teamName, setTeamName] = useState<string>();
@@ -27,7 +27,7 @@ const useTeamOverview = ({ teamId, teamMemberFilter = '' }: { teamId: string, te
 
   const getTeamInfo = async () => {
     try {
-      const { name, teamLeadId, teamMemberIds } = await getTeamOverview(teamId);
+      const {name, teamLeadId, teamMemberIds} = await getTeamOverview(teamId);
       setTeamName(name);
       const teamLeadInfo = await getUserData(teamLeadId);
       setTeamLead(teamLeadInfo);
@@ -43,8 +43,6 @@ const useTeamOverview = ({ teamId, teamMemberFilter = '' }: { teamId: string, te
   useEffect(() => {
     getTeamInfo();
   }, []);
-
-
 
   const members = teamMemberFilter
     ?
