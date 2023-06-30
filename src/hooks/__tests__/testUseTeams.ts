@@ -4,12 +4,12 @@ import * as API from '../../api';
 
 const defaultTeamsMock = [
   {
-      id: '1',
-      name: 'Team1',
+    id: '1',
+    name: 'Team1',
   },
   {
-      id: '2',
-      name: 'Team2',
+    id: '2',
+    name: 'Team2',
   },
 ];
 
@@ -19,11 +19,15 @@ describe('useTeams', () => {
     jest.spyOn(API, 'getTeams').mockResolvedValue(defaultTeamsMock);
   });
 
-  it('should return the loading state', async() => {  
-      const {result} = renderHook(() => useTeams());
-      expect(result.current.isLoading).toBe(true);
-      expect(result.current.error).toBeUndefined();
-      expect(result.current.teams).toEqual([]);
+  afterAll(() => {
+    jest.resetAllMocks();
+  })
+
+  it('should return the loading state', async () => {
+    const {result} = renderHook(() => useTeams());
+    expect(result.current.isLoading).toBe(true);
+    expect(result.current.error).toBeUndefined();
+    expect(result.current.teams).toEqual([]);
   });
 
   it('should return the team list when there`s no error', async () => {
@@ -31,13 +35,8 @@ describe('useTeams', () => {
     await waitFor(() => {
       expect(result.current.teams).toEqual(defaultTeamsMock);
     });
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false);
-    });
-    await waitFor(() => {
-      expect(result.current.error).toBeUndefined();
-    });
-
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.error).toBeUndefined();
   });
 
   it('should return the the error', async () => {
@@ -46,11 +45,7 @@ describe('useTeams', () => {
     await waitFor(() => {
       expect(result.current.teams).toEqual([]);
     });
-    await waitFor(() => {
-      expect(result.current.isLoading).toBe(false);
-    });
-    await waitFor(() => {
-      expect(result.current.error).toBe('Oops');
-    });
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.error).toBe('Oops');
   });
 });
