@@ -21,7 +21,7 @@ describe('useTeams', () => {
 
   afterAll(() => {
     jest.resetAllMocks();
-  })
+  });
 
   it('should return the loading state', async () => {
     const {result} = renderHook(() => useTeams());
@@ -43,9 +43,9 @@ describe('useTeams', () => {
     jest.spyOn(API, 'getTeams').mockRejectedValueOnce('Oops');
     const {result} = renderHook(() => useTeams());
     await waitFor(() => {
-      expect(result.current.teams).toEqual([]);
+      expect(result.current.error).toBe('Oops');
     });
     expect(result.current.isLoading).toBe(false);
-    expect(result.current.error).toBe('Oops');
+    expect(result.current.teams).toEqual([]);
   });
 });
