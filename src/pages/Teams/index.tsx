@@ -46,7 +46,7 @@ const Teams = () => {
 
     return (
         <Container>
-            <Header title="Teams" showBackButton={false} />
+            <Header title="Teams" hideBackButton/>
             {(!isLoading && !error) &&
                 <SearchInput setSearchTerm={setTeamNameFilter} placeholder='Search team by name' />
             }
