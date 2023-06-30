@@ -1,13 +1,16 @@
-import * as React from 'react';
-import {ListItem, Teams as TeamsList} from 'types';
-import {getTeams as fetchTeams} from '../api';
+import React, {useState} from 'react';
+import {IListItem, ITeam as ITeamList} from 'types';
+import SearchInput from 'components/SearchInput';
+import NoResultState from 'components/NoResultState';
+import ErrorState from 'components/ErrorState';
 import Header from '../components/Header';
 import List from '../components/List';
+import useTeams from '../hooks/useTeams';
 import {Container} from '../components/GlobalComponents';
 
-var MapT = (teams: TeamsList[]) => {
-    return teams.map(team => {
-        var columns = [
+const mappedTeams = (teams: ITeamList[]): IListItem[] => {
+    return teams?.map(team => {
+        const columns = [
             {
                 key: 'Name',
                 value: team.name,
@@ -18,27 +21,36 @@ var MapT = (teams: TeamsList[]) => {
             url: `/team/${team.id}`,
             columns,
             navigationProps: team,
-        } as ListItem;
+        };
     });
 };
 
 const Teams = () => {
-    const [teams, setTeams] = React.useState<any>([]);
-    const [isLoading, setIsLoading] = React.useState<any>(true);
+    const [teamNameFilter, setTeamNameFilter] = useState<string>();
+    const {teams, isLoading, error} = useTeams(teamNameFilter);
 
-    React.useEffect(() => {
-        const getTeams = async () => {
-            const response = await fetchTeams();
-            setTeams(response);
-            setIsLoading(false);
-        };
-        getTeams();
-    }, []);
+    const noResultFound = teamNameFilter && teams?.length === 0;
+
+    const renderContent = () => {
+        if (error) {
+            return <ErrorState />;
+        }
+
+        if (noResultFound) {
+            return <NoResultState term={teamNameFilter} />;
+        }
+
+        return <List items={mappedTeams(teams || [])} isLoading={isLoading} />;
+    };
+
 
     return (
         <Container>
             <Header title="Teams" showBackButton={false} />
-            <List items={MapT(teams)} isLoading={isLoading} />
+            {(!isLoading && !error) &&
+                <SearchInput setSearchTerm={setTeamNameFilter} placeholder='Search team by name' />
+            }
+            {renderContent()}
         </Container>
     );
 };
