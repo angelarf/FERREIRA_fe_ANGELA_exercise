@@ -14,7 +14,7 @@ const List = ({items, hasNavigation = true, isLoading}: Props) => {
     if (isLoading) {
         return <Spinner />;
     }
-    const resultsLabel = `${items?.length || 0} team(s)`;
+    const resultsLabel = `${items?.length || 0} result(s)`;
     return (
         <React.Fragment>
             <ResultsLabel>{resultsLabel}</ResultsLabel>

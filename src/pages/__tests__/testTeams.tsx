@@ -57,7 +57,7 @@ describe('Teams', () => {
         render(<Teams />);
         userEvent.type(await screen.findByPlaceholderText(/search team by name/i), 'Team1');
         expect(await screen.findByText('Team1')).toBeInTheDocument();
-        expect(await screen.findByText('1 team(s)')).toBeInTheDocument();
+        expect(await screen.findByText('1 result(s)')).toBeInTheDocument();
         expect(screen.queryByText('Team2')).toBeNull();
     });
    
