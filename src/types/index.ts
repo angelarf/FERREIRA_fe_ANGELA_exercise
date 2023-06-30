@@ -5,6 +5,7 @@ export interface ITeam {
 
 export interface ITeamOverview {
     id: string;
+    name: string;
     teamLeadId: string;
     teamMemberIds: string[];
 }
