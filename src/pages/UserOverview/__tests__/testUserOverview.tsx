@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {render, screen, waitForElementToBeRemoved} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import * as API from '../../../api';
+import {render, screen} from '@testing-library/react';
 import UserOverview from '../index';
 
 jest.mock('react-router-dom', () => ({
