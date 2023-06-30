@@ -41,7 +41,7 @@ describe('Header', () => {
     });
 
     it('should navigate back when back button is clicked', () => {
-        render(<Header title="Header" hideBackButton />);
+        render(<Header title="Header" />);
 
         fireEvent.click(screen.getByRole('button'));
 
