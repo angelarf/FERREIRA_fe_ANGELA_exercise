@@ -3,10 +3,10 @@ import {IListItem, ITeam as ITeamList} from 'types';
 import SearchInput from 'components/SearchInput';
 import NoResultState from 'components/NoResultState';
 import ErrorState from 'components/ErrorState';
-import Header from '../components/Header';
-import List from '../components/List';
-import useTeams from '../hooks/useTeams';
-import {Container} from '../components/GlobalComponents';
+import Header from '../../components/Header';
+import List from '../../components/List';
+import useTeams from '../../hooks/useTeams';
+import {Container} from '../../components/GlobalComponents';
 
 const mappedTeams = (teams: ITeamList[]): IListItem[] => {
     return teams?.map(team => {
@@ -40,7 +40,7 @@ const Teams = () => {
             return <NoResultState term={teamNameFilter} />;
         }
 
-        return <List items={mappedTeams(teams || [])} isLoading={isLoading} />;
+        return <List items={mappedTeams(teams)} isLoading={isLoading} />;
     };
 
 
