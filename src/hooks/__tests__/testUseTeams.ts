@@ -40,7 +40,7 @@ describe('useTeams', () => {
   });
 
   it('should return the the error', async () => {
-    jest.spyOn(API, 'getTeams').mockRejectedValueOnce('Oops');
+    jest.spyOn(API, 'getTeams').mockRejectedValueOnce(new Error('Oops'));
     const {result} = renderHook(() => useTeams());
     await waitFor(() => {
       expect(result.current.error).toBe('Oops');

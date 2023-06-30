@@ -22,7 +22,7 @@ const useTeams = (teamNameFilter = '') => {
       setTeamList(response);
       setIsLoading(false);
     } catch (e) {
-      setError(e || new Error('Oops, something wrong happened'));
+      setError(e?.message || 'Oops, something wrong happened');
       setIsLoading(false);
     }
   };
