@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {debounce} from 'lodash';
 
 import {Container, Input} from './styles';
@@ -12,9 +12,9 @@ type SearchInputProps = {
 const SearchInput = ({setSearchTerm, placeholder = 'Search ...'}: SearchInputProps) => {
   const [value, setValue] = useState('');
 
-  const debouncedSave = useCallback(
-    debounce((nextValue: string) => setSearchTerm(nextValue), 500),
-    [],
+  const debouncedSave = useMemo(
+    () => debounce((nextValue: string) => setSearchTerm(nextValue), 500),
+    [setSearchTerm],
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
