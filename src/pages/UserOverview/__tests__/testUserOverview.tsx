@@ -1,13 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 import {render, screen} from '@testing-library/react';
-import UserOverview from '../UserOverview';
+import UserOverview from '../index';
 
 jest.mock('react-router-dom', () => ({
     useLocation: () => ({
         state: {
-            firstName: 'Test',
-            lastName: 'User',
-            displayName: 'userName',
+            firstName: 'John',
+            lastName: 'Doe',
+            displayName: 'johnDoe',
             location: 'location',
         },
     }),
@@ -15,11 +15,10 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('UserOverview', () => {
-    it('should render UserOverview', () => {
+   it('should render the user info', async () => {
         render(<UserOverview />);
-
-        expect(screen.getByText('Test User')).toBeInTheDocument();
-        expect(screen.getByText('userName')).toBeInTheDocument();
+        expect(screen.getByText('John Doe')).toBeInTheDocument();
+        expect(screen.getByText('johnDoe')).toBeInTheDocument();
         expect(screen.getByText('location')).toBeInTheDocument();
     });
 });

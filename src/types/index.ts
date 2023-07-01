@@ -1,15 +1,16 @@
-export interface Teams {
+export interface ITeam {
     id: string;
     name: string;
 }
 
-export interface TeamOverview {
+export interface ITeamOverview {
     id: string;
+    name: string;
     teamLeadId: string;
     teamMemberIds: string[];
 }
 
-export interface UserData {
+export interface IUserData {
     id: string;
     firstName: string;
     lastName: string;
@@ -18,14 +19,14 @@ export interface UserData {
     avatar: string;
 }
 
-export interface ListItemColumn {
+export interface IListItemColumn {
     key: string;
     value: string;
 }
 
-export interface ListItem {
+export interface IListItem {
     id: string;
     url?: string;
-    columns: Array<ListItemColumn>;
-    navigationProps?: UserData | Teams;
+    columns: Array<IListItemColumn>;
+    navigationProps?: IUserData | ITeam;
 }

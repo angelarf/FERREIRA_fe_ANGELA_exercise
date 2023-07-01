@@ -4,20 +4,16 @@ import {HeaderContainer, NavigationHeader, BackButton, Title} from './styles';
 
 interface Props {
     title: string;
-    showBackButton?: boolean;
+    hideBackButton?: boolean;
 }
 
-const Header = ({title, showBackButton = true}: Props) => {
+const Header = ({title, hideBackButton}: Props) => {
     const navigate = useNavigate();
     return (
         <HeaderContainer>
             <NavigationHeader>
-                {showBackButton && (
-                    <BackButton
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    >
+                {!hideBackButton && (
+                    <BackButton onClick={() => { navigate(-1);}}>
                         🔙
                     </BackButton>
                 )}

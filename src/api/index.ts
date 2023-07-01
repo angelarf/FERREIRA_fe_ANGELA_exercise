@@ -1,21 +1,21 @@
-import {Teams, TeamOverview, UserData} from 'types';
+import {ITeam, ITeamOverview, IUserData} from 'types';
 
 const getData = async (path = '') => {
-    const url = `${process.env.REACT_APP_API_BASE_URL}/${path}`;
-    const res = await fetch(url);
-    const json = await res.json();
+        const url = `${process.env.REACT_APP_API_BASE_URL}/${path}`;
+        const res = await fetch(url);
+        const json = await res.json();
+        
+        return json;
+    };
 
-    return json;
-};
-
-export const getTeams = (): Promise<Teams[]> => {
+export const getTeams = (): Promise<ITeam[]> => {
     return getData('teams');
 };
 
-export const getTeamOverview = (teamId: string): Promise<TeamOverview> => {
+export const getTeamOverview = (teamId: string): Promise<ITeamOverview> => {
     return getData(`teams/${teamId}`);
 };
 
-export const getUserData = (userId: string): Promise<UserData> => {
+export const getUserData = (userId: string): Promise<IUserData> => {
     return getData(`users/${userId}`);
 };

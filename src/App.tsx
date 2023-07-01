@@ -5,7 +5,7 @@ import Teams from './pages/Teams';
 import UserOverview from './pages/UserOverview';
 
 const App = () => {
-    var router = createBrowserRouter([
+    const router = createBrowserRouter([
         {
             path: '/',
             element: <Teams />,
@@ -15,7 +15,7 @@ const App = () => {
             element: <TeamOverview />,
         },
         {
-            path: '/user/:useId',
+            path: '/user/:userId',
             element: <UserOverview />,
         },
     ]);
