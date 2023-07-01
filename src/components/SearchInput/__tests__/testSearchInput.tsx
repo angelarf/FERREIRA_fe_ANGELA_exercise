@@ -1,8 +1,8 @@
 import React from 'react';
 import {render, screen, waitFor} from '@testing-library/react';
 import debouce from 'lodash/debounce';
-import SearchInput from '..';
 import userEvent from '@testing-library/user-event';
+import SearchInput from '..';
 
 jest.mock('lodash/debounce');
 debouce.mockImplementation(fn => fn);
@@ -19,6 +19,6 @@ describe('SearchInput', () => {
       userEvent.type(screen.getByPlaceholderText('Search ...'), 'myText');
       await waitFor(() => {
         expect(spy).toHaveBeenCalledWith('myText');
-      })
+      });
     });
 });
