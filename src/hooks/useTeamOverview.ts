@@ -25,24 +25,24 @@ const useTeamOverview = ({teamId, teamMemberFilter = ''}: { teamId: string, team
     return userData;
   };
 
-  const getTeamInfo = async () => {
-    try {
-      const {name, teamLeadId, teamMemberIds} = await getTeamOverview(teamId);
-      setTeamName(name);
-      const teamLeadInfo = await getUserData(teamLeadId);
-      setTeamLead(teamLeadInfo);
-      const members = await getMemberInfo(teamMemberIds);
-      setTeamMembers(members);
-      setIsLoading(false);
-    } catch (e) {
-      setError(e?.message || 'Oops, something wrong happened');
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const getTeamInfo = async () => {
+      try {
+        const {name, teamLeadId, teamMemberIds} = await getTeamOverview(teamId);
+        setTeamName(name);
+        const teamLeadInfo = await getUserData(teamLeadId);
+        setTeamLead(teamLeadInfo);
+        const members = await getMemberInfo(teamMemberIds);
+        setTeamMembers(members);
+        setIsLoading(false);
+      } catch (e) {
+        setError(e?.message || 'Oops, something wrong happened');
+        setIsLoading(false);
+      }
+    };
+
     getTeamInfo();
-  }, []);
+  }, [teamId]);
 
   const members = teamMemberFilter
     ?
