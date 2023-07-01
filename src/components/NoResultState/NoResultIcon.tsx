@@ -8,6 +8,7 @@ function NoResultIcon(props: React.SVGProps<SVGSVGElement>) {
         viewBox="0 0 128 128"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        data-testid="noResultIcon"
         {...props}
     >
       <g clipPath="url(#prefix__clip0_33_172)">
